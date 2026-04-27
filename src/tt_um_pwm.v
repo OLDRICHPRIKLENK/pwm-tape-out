@@ -8,7 +8,7 @@
 `timescale 1ns / 1ps
 
 module tt_um_pwm (
-    input  wire CLK100MHZ,
+    input  wire clk,
     input  wire CPU_RESETN, // Active-low reset
     input  wire [1:0] sw,   // sw[0]: reset, sw[1]: amplitude toggle
     input  wire btn_toggle, // Cycles through breathing speeds
