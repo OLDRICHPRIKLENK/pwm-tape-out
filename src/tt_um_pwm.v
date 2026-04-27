@@ -7,7 +7,7 @@
 
 `timescale 1ns / 1ps
 
-module top (
+module tt_um_pwm (
     input  wire CLK100MHZ,
     input  wire CPU_RESETN, // Active-low reset
     input  wire [1:0] sw,   // sw[0]: reset, sw[1]: amplitude toggle

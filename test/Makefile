@@ -6,7 +6,13 @@ SIM ?= icarus
 FST ?= -fst # Use more efficient FST format
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
-PROJECT_SOURCES = project.v
+PROJECT_SOURCES = tt_um_pwm.v
+PROJECT_SOURCES = address_counter.v
+PROJECT_SOURCES = button_ctrl.v
+PROJECT_SOURCES = lut_rom.v
+PROJECT_SOURCES = pwm_core.v
+PROJECT_SOURCES = sawtooth.mem
+PROJECT_SOURCES = scaler.v
 
 ifneq ($(GATES),yes)
 
