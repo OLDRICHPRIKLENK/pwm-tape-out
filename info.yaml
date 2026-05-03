@@ -22,7 +22,6 @@ project:
     - "button_ctrl.v"
     - "lut_rom.v"
     - "pwm_core.v"
-    - "sawtooth.mem"
     - "scaler.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
