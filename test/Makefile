@@ -6,13 +6,15 @@ SIM ?= icarus
 FST ?= -fst # Use more efficient FST format
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
-PROJECT_SOURCES = tt_um_pwm.v
-PROJECT_SOURCES = address_counter.v
-PROJECT_SOURCES = button_ctrl.v
-PROJECT_SOURCES = lut_rom.v
-PROJECT_SOURCES = pwm_core.v
-PROJECT_SOURCES = sawtooth.mem
-PROJECT_SOURCES = scaler.v
+# RTL sources
+PROJECT_SOURCES = tt_um_pwm.v \
+                  address_counter.v \
+                  button_ctrl.v \
+                  lut_rom.v \
+                  pwm_core.v \
+                  scaler.v
+
+# Note: sawtooth.mem is removed from this list!
 
 ifneq ($(GATES),yes)
 
