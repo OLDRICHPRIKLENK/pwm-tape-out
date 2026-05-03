@@ -1,7 +1,7 @@
 `default_nettype none
 `timescale 1ns / 1ps
 
-module tb_tt_um_pwm;
+module tb;
     // Testbench signals
     reg clk;
     reg reset_n;
