@@ -24,16 +24,18 @@ module tb;
         .rst_n  (rst_n)     // not reset
     );
 
-    // 2. Setup Waveform Dumping and Prescaler Hack
     initial begin
         $dumpfile("tb.fst");
         $dumpvars(0, tb);
         
-        // You can keep your prescaler trick here to speed up the simulation!
-        // Just make sure the hierarchy path is correct if it's inside another module.
+        // --- THE MAGIC TRICK ---
+        // Only apply this force during normal RTL simulation.
+        // During Gate-Level (GL) simulation, internal wire names are destroyed 
+        // by the synthesis tool, so this would cause an error.
+`ifndef GL_TEST
         force uut.current_speed_prescaler = 24'd8;
+`endif
     end
-
     // Do NOT generate a clock here.
     // Do NOT put test stimulus here.
     // Do NOT use $finish.
