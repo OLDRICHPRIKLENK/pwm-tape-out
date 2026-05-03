@@ -68,26 +68,25 @@ module tt_um_pwm (
         .rom_addr(current_rom_addr)
     );
 
-    // Stage 2 (Using lut_rom based on your Makefile)
-    lut_rom u_bram (
+    // Stage 2
+    waveform_bram u_bram (
         .clk(clk),                // Fixed from CLK100MHZ
         .rom_addr(current_rom_addr),
         .raw_duty(raw_waveform_duty)
     );
 
-    // Stage 3 (Using scaler based on your Makefile)
-    scaler u_scaler (
+    // Stage 3
+    amplitude_scaler u_scaler (
         .raw_duty(raw_waveform_duty),
         .amplitude(current_amplitude),
         .scaled_duty(final_scaled_duty)
     );
 
-    // Stage 4 (Using pwm_core based on your Makefile)
-    pwm_core u_pwm (
+    // Stage 4
+    pwm_generator u_pwm (
         .clk(clk),                // Fixed from CLK100MHZ
         .rst(rst_active_high),
         .scaled_duty(final_scaled_duty),
         .pwm_out(pwm_signal)
     );
-
 endmodule
