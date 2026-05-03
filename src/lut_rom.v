@@ -11,7 +11,7 @@ module waveform_bram (
 
     // Load the pre-calculated sine wave from a file during synthesis
     initial begin
-        $readmemh("C:/Users/oprik/Documents/VUT/project_SPICE/src/sawtooth.mem", memory); 
+        $readmemh("sawtooth.mem", memory); 
     end
 
     // Synchronous read (Mandatory for inferring Block RAM)
