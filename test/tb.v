@@ -2,52 +2,40 @@
 `timescale 1ns / 1ps
 
 module tb;
-    // Testbench signals
-    reg clk;
-    reg reset_n;
-    reg [1:0] sw;
-    reg btn_toggle;
-    wire [15:0] led;
+    // Tiny Tapeout standard signals
+    reg  clk;
+    reg  rst_n;
+    reg  ena;
+    reg  [7:0] ui_in;
+    reg  [7:0] uio_in;
+    wire [7:0] uo_out;
+    wire [7:0] uio_out;
+    wire [7:0] uio_oe;
 
-    // Instantiate the Top Module
-    top uut (
-        .CLK100MHZ(clk),
-        .CPU_RESETN(reset_n),
-        .sw(sw),
-        .btn_toggle(btn_toggle),
-        .LED(led)
+    // 1. Instantiate the correct Top Module
+    tt_um_pwm uut (
+        .ui_in  (ui_in),    // Dedicated inputs
+        .uo_out (uo_out),   // Dedicated outputs
+        .uio_in (uio_in),   // IOs: Input path
+        .uio_out(uio_out),  // IOs: Output path
+        .uio_oe (uio_oe),   // IOs: Enable path (active high: 0=input, 1=output)
+        .ena    (ena),      // enable - goes high when design is selected
+        .clk    (clk),      // clock
+        .rst_n  (rst_n)     // not reset
     );
 
-    // Generate a 100MHz clock (10ns period -> toggles every 5ns)
-    always #5 clk = ~clk;
-
+    // 2. Setup Waveform Dumping and Prescaler Hack
     initial begin
-        // 1. Initialize Inputs
-        clk = 0;
-        reset_n = 0;   // Assert active-low reset
-        sw = 2'b00;    // sw[0] = 0, sw[1] = 0 (50% amplitude)
-        btn_toggle = 1;
-
-        // --- THE MAGIC TRICK ---
-        // Force the internal prescaler wire to a tiny value (10 clock cycles)
-        // so we can actually see the waveform progress in a few microseconds!
+        $dumpfile("tb.fst");
+        $dumpvars(0, tb);
+        
+        // You can keep your prescaler trick here to speed up the simulation!
+        // Just make sure the hierarchy path is correct if it's inside another module.
         force uut.current_speed_prescaler = 24'd8;
-
-        // 2. Release Reset after 100ns
-        #100;
-        reset_n = 1;
-
-        // 3. Let it run for 100 microseconds to watch the 50% amplitude wave
-        #10000000;
-
-        // 4. Flip switch 1 UP to test 100% amplitude scaler
-        sw[1] = 1;
-
-        // 5. Let it run for another 100 microseconds
-        #100000;
-
-        // End simulation
-        $finish;
     end
 
+    // Do NOT generate a clock here.
+    // Do NOT put test stimulus here.
+    // Do NOT use $finish.
+    // Cocotb (test.py) will handle all of that!
 endmodule
