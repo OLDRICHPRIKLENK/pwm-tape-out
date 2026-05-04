@@ -13,7 +13,7 @@ We built a PWM module in verilog.
 
 ## How to test
 
-Plug in and play
+Plug in and play. Optional to test with oscilloscope. 
 
 
 ## External hardware

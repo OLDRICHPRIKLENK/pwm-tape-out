@@ -14,7 +14,6 @@ PROJECT_SOURCES = tt_um_pwm.v \
                   pwm_core.v \
                   scaler.v
 
-# Note: sawtooth.mem is removed from this list!
 
 ifneq ($(GATES),yes)
 
