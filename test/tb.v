@@ -13,7 +13,7 @@ module tb;
     wire [7:0] uio_oe;
 
     // 1. Instantiate the correct Top Module
-    tt_um_pwm uut (
+    tt_um_pwm_spice uut (
         .ui_in  (ui_in),    // Dedicated inputs
         .uo_out (uo_out),   // Dedicated outputs
         .uio_in (uio_in),   // IOs: Input path
